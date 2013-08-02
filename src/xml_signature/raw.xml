@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="BIG5"?>
+<Root>
+	<ABC>TEST</ABC>
+	<XML>
+		<DEF id="test">This is 中文 test...</DEF>
+	</XML>
+</Root>

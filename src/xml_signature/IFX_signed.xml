@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="BIG5"?>
+<XML xmlns="http://www.ifxforum.org">
+	<SignOn Id="TestSign">
+		<Service>D200222</Service>
+		<Rquid>1234567800-2003/12/23-12:20:56-00005</Rquid>
+		<TimeStamp>2003-11-19 10:25:21</TimeStamp>
+		<From>HNCB</From>
+		<To>97172485</To>
+		<Status>
+			<StatusCode>000000</StatusCode>
+			<ErrorDesc>2筆預約成功,1筆預約失敗.</ErrorDesc>
+		</Status>
+		<DetailData>
+			<Rquid>1234567800-2003/12/23-12:20:56-00005</Rquid>
+			<PayCount>3</PayCount>
+			<PayAmt>985</PayAmt>
+			<PayDate>00921203</PayDate>
+			<PayAcct>100200000025</PayAcct>
+			<PayeeData>
+				<Bank>0070000</Bank>
+				<Acct>100123456789</Acct>
+				<Amt>555</Amt>
+				<RefNo/>
+				<ErrCode>000000</ErrCode>
+				<ErrDesc>預約成功</ErrDesc>
+			</PayeeData>
+			<PayeeData>
+				<Bank>0080000</Bank>
+				<Acct>200123456789</Acct>
+				<Amt>330</Amt>
+				<RefNo/>
+				<ErrCode>R04   </ErrCode>
+				<ErrDesc>上傳/預約失敗(收款帳號錯誤)</ErrDesc>
+			</PayeeData>
+			<PayeeData>
+				<Bank>0090000</Bank>
+				<Acct>100200000025</Acct>
+				<Amt>100</Amt>
+				<RefNo/>
+				<ErrCode>000000</ErrCode>
+				<ErrDesc>預約成功</ErrDesc>
+			</PayeeData>
+		</DetailData>
+	</SignOn>
+	<ds:Signature Id="Linkway02" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><ds:Reference URI="#TestSign"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>BhimfFt5hYhZ9S00NVqGNpKiwqE=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>ZPA7p5p9ZrA5KZ6AqXlc0YKSDfqg1gnFByox9Yx9gJj15DgOtO0ZVqtdR2FSiPvZ
+i8aYznIwNAG05WeEWfWX3PLTKtWsyOvqLttG9QrwAxC6UUCW0Ov+aa+R704xYVfL
+vyG/PkuJdgEvbsTqPjV7KmfnUUUhxeVgwTqwYFV4dRQ=</ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIElTCCA/6gAwIBAgIQG42D5w4f9jiRXlNcV8yRMjANBgkqhkiG9w0BAQUFADB0
+MQswCQYDVQQGEwJUVzEVMBMGA1UEChMMSGlUUlVTVCBJbmMuMSYwJAYDVQQLEx1I
+aVRSVVNUIEZYTUwgVmFsdWFibGUgVXNlciBDQTEmMCQGA1UEAxMdSGlUUlVTVCBG
+WE1MIFZhbHVhYmxlIEJhbmtpbmcwHhcNMDMwNTIyMDAwMDAwWhcNMDQwNTIxMjM1
+OTU5WjCBljELMAkGA1UEBhMCVFcxGDAWBgNVBAoTD0hpVFJVU1QgRmluYW5jZTEd
+MBsGA1UECxMUSGlUUlVTVCBGWE1MIEJhbmtpbmcxJjAkBgNVBAsTHUhpVFJVU1Qg
+VmFsdWFibGUtT3JnYW5pemF0aW9uMQ0wCwYDVQQLEwRGWE1MMRcwFQYDVQQDEw4w
+Mzc0MjMwMS0wMS0wMTCBnTANBgkqhkiG9w0BAQEFAAOBiwAwgYcCgYEAuDlqyrXX
+YcodEygqKo2tWCWs3pXbaGz8z9vAdp0cL8rP1iAjSYRwiLioTPaWMhKQbj3jSgWU
+xpDWADtx0pgJ6hHpbzwmJx3IG2bAbJAVOzbAOeNSkqRiyyq4qV6OsRI0Gml5qO0Q
+fyhWZa60+mb0dZPcn5ueeZkyx7nx2+fU33MCAQOjggIFMIICATAOBgNVHQ8BAf8E
+BAMCB4AwCQYDVR0TBAIwADBmBgNVHR8EXzBdMFugWaBXhlVodHRwOi8vb25zaXRl
+Y3JsLnZlcmlzaWduLmNvbS9IaVRSVVNURmluYW5jZUhpVFJVU1RWYWx1YWJsZU9y
+Z2FuaXphdGlvbi9MYXRlc3RDUkwuY3JsMIHABgNVHSABAf8EgbUwgbIwga8GB2CB
+HgMBAwUwgaMwgaAGCCsGAQUFBwICMIGTGoGQSGlUUlVTVCAoWE1MIENlcnQpIENQ
+UyBhbmQgQWdyZWVtZW50cyBJbmNvcnAuIGJ5IFJlZi4gYXQgd3d3LmhpdHJ1c3Qu
+Y29tLnR3L3JlcG9zaXRvcnksIEJpbmRpbmcgb24gU3Vic2NyaWJlcnMgYW5kIFJl
+bHlpbmcgUGFydGllcyxMSUFCLkxURChjKTAzMB8GA1UdIwQYMBaAFBYcscdTISnN
+KDz3grLNLNYBXTwBMB0GA1UdDgQWBBQczvd6svFJ0cbMPO4WljgwRqF8EzAiBgNV
+HREEGzAZgRd0cm95Y2hvdUBoaXRydXN0LmNvbS50dzA2BggrBgEFBQcBAQQqMCgw
+JgYIKwYBBQUHMAGGGmh0dHA6Ly9vY3NwLmhpdHJ1c3QuY29tLnR3MB0GA1UdJQQW
+MBQGCCsGAQUFBwMCBggrBgEFBQcDBDANBgkqhkiG9w0BAQUFAAOBgQC1i/q/WEw1
+ZK1rAy5UEhpjgRbcQSzwuAzH5AciWx4hptY78NHQxnQa4OBlEsUXoRFCKWVCNKL4
+15HC7GKQHfCsNCGDNGLsvfUa5vUlqTL8FH6DoJpOnEYORmqaackP/7/OD2gCfvNq
+7lkqffOBosOb1kZmxQIVc2Zm4tAueTOG0Q==</ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature>
+</XML>

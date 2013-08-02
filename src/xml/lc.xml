@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="BIG5"?><CDSLcd xmlns="http://www.uxcds.com/xmlschema/cds" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
+<lcInfo appNo="CDSD100003897" />
+<lcDoc>
+    <lcTitle>不可撤銷信用狀</lcTitle>
+    <lcType>sight</lcType>
+    <lcHeader>
+逕啟者：
+　　本行茲循右列申請人之請求開發本信用狀。
+本信用狀規定如有未盡事宜適用國際商會所訂現行
+「信用狀統一慣例與實務」之規定。</lcHeader>
+    <lcNo>2200891179514071</lcNo>
+    <issuingDate>2011/05/13</issuingDate>
+    <issuingBank address="台中市自由路二段３８號　　　　　　　　  　" branchCode="2200" branchName="營業部" code="009" name="彰化銀行" phone="04    22222001" />
+    <advisingBank address="高雄市民權一路５９號　　　　　　　　　  　" branchCode="8119" branchName="高雄分行" changed="false" code="009" name="彰化銀行" phone="07    3361620" />
+    <advisingDate />
+    <advisingBankNo />
+    <payingBank address="台中市自由路二段３８號　　　　　　　　  　" branchCode="2200" branchName="營業部" changed="false" code="009" name="彰化銀行" phone="04    22222001" />
+    <applicant address="10542台北市松山區復興北路427巷26號1F" addressChanged="false" name="大中鋼鐵股份有限公司" nameChanged="false" phone="(04)24756789" regNo="57001161" />
+    <beneficiary address="高雄市小港區中鋼路1號" addressChanged="false" name="中國鋼鐵股份有限公司" nameChanged="false" phone="07-8021111" regNo="30414175" />
+    <amount changed="false" chinese="壹仟伍佰萬元整" value="15000000" />
+    <currency code="1" name="新臺幣" />
+    <expiryDate changed="false">2011/06/22</expiryDate>
+    <lcConditions>
+      <lcCond>本信用狀可由上開受益人在不超過上開金額範圍內，依本狀規定條件簽發匯票洽請本行付款或承兌，該匯票之條件如下：
+
+ 甲、付款人：彰化銀行營業部　地址：台中市自由路二段３８號　　　　　　　　  　
+ 乙、付款期限：■以「見票即付」方式填寫到期日。
+ 　　　　　　　□以「定日付款」方式填寫到期日，其到期日自發票日起算不超過____天。
+ 丙、金　　額：須與相關發票上所開列金額一致。
+ 丁、應檢附之單證如下：
+        
+  1. ■匯票付款申請書乙份。
+          
+  2. ■統一發票
+            
+
+  上項單證應載明申請人向受益人購買下列貨品：
+
+      線材乙批，鋼材乙批(貨品明細以發票為準)</lcCond>
+    </lcConditions>
+    <lcAdditionalConditions>
+      <lcAddCond>特別指示：
+
+1. 電子押匯特別指示條款
+(1)賣方所提供鋼品之一部或全部，可能產自中國鋼鐵公司或中龍鋼鐵公司，視實際出貨狀
+   況而定。如產自中龍公司，賣方就其鋼品品質，負賣方責任，至如約定價格、各交易條
+   件及優惠措施均不受影響。
+(2)匯票及匯票付款申請書使用中鋼格式，由受益人單獨簽章或使用數位憑證有效。
+(3)貨物可以分批交貨。
+(4)發票金額大於匯票金額及發票內容備註「受託代銷」字樣可以接受。
+(5)本信用狀適用eUCP1.1版。
+(6)允許受益人以匯票、匯票付款申請書及發票電子檔方式押匯，另「受益人完整提示通知」
+   得附加於匯票付款申請書之最後。
+(7)押匯電子文件透過網址: HTTPS://CDSLC.UXCDS.COM/CDSLC/提示。
+
+2. 最後交貨日期：同信用狀有效期限
+        </lcAddCond>
+    </lcAdditionalConditions>
+    <conditions>
+      <condition changed="false" name="PaymentTerm" present="general" type="singleChoice" used="true">
+        <title>付款期限</title>
+        <description>付款期限方式</description>
+        <singleChoice name="PaymentTermSingle">
+          <item checked="true" itemValue="atSight" name="Sight">見票即付</item>
+          <item checked="false" itemValue="atDaysAfterDate" name="Usance">發票日後定期付款</item>
+        </singleChoice>
+      </condition>
+      <condition changed="false" name="AtDaysAfterDate" present="usance" type="textBlank" used="false">
+        <title>發票日後定期付款</title>
+        <description>填寫買方到期日</description>
+        <prefixMessage>以「定日付款」方式填寫到期日，其到期日自發票日起算</prefixMessage>
+        <textBlank name="AtDaysBlank">
+          <blank name="AtDays" />
+          <messageSegment>天。</messageSegment>
+        </textBlank>
+      </condition>
+      <condition changed="false" name="GoodsName" present="general" type="textArea" used="true">
+        <title>貨物名稱</title>
+        <description>填寫貨物名稱</description>
+        <textArea name="GoodsNameArea">
+          <area name="GoodsName">線材乙批
+
+
+
+
+
+
+
+
+
+
+
+鋼材乙批
+
+
+
+
+
+
+
+
+
+
+
+貨品明細以發票為準
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</area>
+        </textArea>
+      </condition>
+      <condition changed="false" name="NonCSNegotiationSpecialClause" present="general" type="textArea" used="false">
+        <title>非中國鋼鐵股份有限公司之電子押匯特別指示條款</title>
+        <description>不使用中鋼之電子押匯特別指示條款，並自行填寫電子押匯特別指示條款</description>
+        <textArea name="NonCSNegotiationSpecialClauseArea">
+          <area name="NonCSNegotiationSpecialClause">(1)賣方所提供鋼品之一部或全部，可能產自中國鋼鐵公司或中龍鋼鐵公司，視實際出貨狀
+   況而定。如產自中龍公司，賣方就其鋼品品質，負賣方責任，至如約定價格、各交易條
+   件及優惠措施均不受影響。
+(2)匯票及匯票付款申請書使用中鋼格式，由受益人單獨簽章或使用數位憑證有效。
+(3)貨物可以分批交貨。
+(4)發票金額大於匯票金額及發票內容備註「受託代銷」字樣可以接受。
+(5)本信用狀適用eUCP1.1版。
+(6)允許受益人以匯票、匯票付款申請書及發票電子檔方式押匯，另「受益人完整提示通知」
+   得附加於匯票付款申請書之最後。
+(7)押匯電子文件透過網址: HTTPS://CDSLC.UXCDS.COM/CDSLC/提示。</area>
+        </textArea>
+        <prefixMessage>中國鋼鐵股份有限公司之電子押匯特別指示條款
+</prefixMessage>
+        <prefixMessage>(1)賣方所提供鋼品之一部或全部，可能產自中國鋼鐵公司或中龍鋼鐵公司，視實際出貨狀
+   況而定。如產自中龍公司，賣方就其鋼品品質，負賣方責任，至如約定價格、各交易條
+</prefixMessage>
+        <prefixMessage>   件及優惠措施均不受影響。
+</prefixMessage>
+        <prefixMessage>(2)匯票及匯票付款申請書使用中鋼格式，由受益人單獨簽章或使用數位憑證有效。
+</prefixMessage>
+        <prefixMessage>(3)貨物可以分批交貨。
+</prefixMessage>
+        <prefixMessage>(4)發票金額大於匯票金額及發票內容備註「受託代銷」字樣可以接受。
+</prefixMessage>
+        <prefixMessage>(5)本信用狀適用eUCP1.1版。
+</prefixMessage>
+        <prefixMessage>(6)允許受益人以匯票、匯票付款申請書及發票電子檔方式押匯，另「受益人完整提示通知」
+   得附加於匯票付款申請書之最後。
+</prefixMessage>
+        <prefixMessage>(7)押匯電子文件透過網址: HTTPS://CDSLC.UXCDS.COM/CDSLC/提示。
+</prefixMessage>
+        <prefixMessage>或自行填寫電子押匯特別指示條款
+</prefixMessage>
+      </condition>
+      <condition changed="false" name="DraftPaymentApplication" present="sight" type="textOnly" used="true">
+        <title>檢附單證</title>
+        <description>檢附匯票付款申請書乙份</description>
+        <textOnly name="DraftPaymentApplicationText">
+          <messageSegment>匯票付款申請書乙份</messageSegment>
+        </textOnly>
+      </condition>
+      <condition changed="false" name="DraftAcceptanceApplication" present="usance" type="textOnly" used="false">
+        <title>檢附單證</title>
+        <description>檢附匯票承兌申請書乙份</description>
+        <textOnly name="DraftAcceptanceApplicationText">
+          <messageSegment>匯票承兌申請書乙份</messageSegment>
+        </textOnly>
+      </condition>
+      <condition changed="false" name="Invoice" present="general" type="textOnly" used="true">
+        <title>檢附單證</title>
+        <description>檢附統一發票，並選擇正本或影本</description>
+        <textOnly name="InvoiceText">
+          <messageSegment>統一發票</messageSegment>
+        </textOnly>
+      </condition>
+      <condition changed="false" name="OtherAppendix" present="general" type="textArea" used="false">
+        <title>其他檢附單據</title>
+        <description>填寫其他檢附單據</description>
+        <textArea name="OtherAppendixArea">
+          <area name="OtherAppendix">~請填寫其他應檢附之單據~</area>
+        </textArea>
+        <prefixMessage>其 它：</prefixMessage>
+      </condition>
+      <condition changed="false" name="DraftPaymentApplicationFormat" present="sight" type="textOnly" used="false">
+        <title>匯票付款申請書</title>
+        <description>匯票付款申請書</description>
+        <textOnly name="DraftPaymentApplicationFormatText">
+          <messageSegment>匯票付款申請書上申請人所蓋印鑑應與原留印鑑相符</messageSegment>
+        </textOnly>
+      </condition>
+      <condition changed="false" name="DraftPaymentApplicationFormatEx" present="sight" type="textOnly" used="false">
+        <title>匯票付款申請書</title>
+        <description>匯票付款申請書</description>
+        <textOnly name="DraftPaymentApplicationFormatExText">
+          <messageSegment>匯票付款申請書由信用狀受益人單獨蓋章。(本項總行核准，始得適用)</messageSegment>
+        </textOnly>
+      </condition>
+      <condition changed="false" name="DraftAcceptanceApplicationFormat" present="usance" type="textOnly" used="false">
+        <title>匯票承兌申請書</title>
+        <description>匯票承兌申請書</description>
+        <textOnly name="DraftAcceptanceApplicationFormatText">
+          <messageSegment>匯票承兌申請書上申請人所蓋印鑑應與原留印鑑相符</messageSegment>
+        </textOnly>
+      </condition>
+      <condition changed="false" name="DraftAcceptanceApplicationFormatEx" present="usance" type="textOnly" used="false">
+        <title>匯票承兌申請書</title>
+        <description>匯票承兌申請書</description>
+        <textOnly name="DraftAcceptanceApplicationFormatExText">
+          <messageSegment>匯票承兌申請書由信用狀受益人單獨蓋章。(本項總行核准，始得適用)</messageSegment>
+        </textOnly>
+      </condition>
+      <condition changed="false" name="IsBatchDeliverGoods" present="general" type="singleChoice" used="false">
+        <title>交貨方式</title>
+        <description>選擇是否可分批交貨</description>
+        <prefixMessage>交貨方式：</prefixMessage>
+        <singleChoice name="IsBatchDeliverGoodsSingle">
+          <item checked="true" itemValue="true" name="Yes">可以分批交貨</item>
+          <item checked="false" itemValue="false" name="No">不可以分批交貨</item>
+        </singleChoice>
+      </condition>
+      <condition changed="false" name="LastDateOfDelivery" present="general" type="textBlank" used="false">
+        <title>最後交貨日期</title>
+        <description>最後交貨日期</description>
+        <prefixMessage>最後交貨日期</prefixMessage>
+        <textBlank name="LastDateOfDeliveryBlank">
+          <blank name="LastDateOfDelivery" />
+          <messageSegment />
+        </textBlank>
+      </condition>
+      <condition changed="false" name="canInvoiceDateBeforeLcAppDate" present="general" type="textOnly" used="false">
+        <title>發票日期</title>
+        <description>發票日期早於開狀日期可以接受</description>
+        <textOnly name="canInvoiceDateBeforeLcAppDateText">
+          <messageSegment>統一發票早於開狀日可接受。</messageSegment>
+        </textOnly>
+      </condition>
+      <condition changed="false" name="canInvoiceAmountMoreThenLcAppAmount" present="general" type="textOnly" used="false">
+        <title>發票金額</title>
+        <description>發票金額大於開狀金額可以接受</description>
+        <textOnly name="canInvoiceAmountMoreThenLcAppAmountText">
+          <messageSegment>統一發票金額大於開狀金額可接受。</messageSegment>
+        </textOnly>
+      </condition>
+      <condition changed="false" name="OtherSpecialClause" present="general" type="textArea" used="false">
+        <title>其他特別指示條款</title>
+        <description>填寫其他特別指示條款</description>
+        <textArea name="OtherSpecialClauseArea">
+          <area name="OtherSpecialClause">~其他特別指示條款~</area>
+        </textArea>
+        <prefixMessage>其 它：</prefixMessage>
+      </condition>
+      <condition changed="false" name="SpecialMessageForCS" present="general" type="singleChoice" used="true">
+        <title>中國鋼鐵股份有限公司特殊訊息</title>
+        <description>填寫中國鋼鐵股份有限公司特殊訊息</description>
+        <prefixMessage>特殊訊息</prefixMessage>
+        <singleChoice name="TransactionDepartmentSingle">
+          <item checked="false" itemValue="C21" name="C21">C21</item>
+          <item checked="true" itemValue="C22" name="C22">C22</item>
+          <item checked="false" itemValue="C24" name="C24">C24</item>
+          <item checked="false" itemValue="C25" name="C25">C25</item>
+          <item checked="false" itemValue="C26" name="C26">C26</item>
+        </singleChoice>
+      </condition>
+    </conditions>
+    <lcTail>
+　　上述匯票須載明本信用狀之日期及編號，並限於有效期
+限內向本行辦理提示請求付款或承兌。上述單證經審查結果
+核與本信用狀規定條款相符時，本行保證上開依規定簽發、
+提示之匯票必能如約獲得付款或承兌。
+    上述匯票之付款或承兌，如有指定通知銀行時，得向通
+知銀行洽辦。</lcTail>
+    <advisingBankNotes />
+  </lcDoc><cpDoc>
+    <cpNo />
+    <issuingDate />
+    <dueDate />
+    <issuingBank address="" branchCode="" branchName="" code="" name="" phone="" />
+    <cpAccount />
+    <payingBank address="" branchCode="" branchName="" code="" name="" phone="" />
+    <payer address="" name="" phone="" regNo="" />
+    <payerUndertaker />
+    <beneficiary address="" name="" phone="" regNo="" />
+    <amount chinese="" value="" />
+    <currency code="" name="" />
+    <signet />
+  </cpDoc><lcData>
+    <payment>
+      <term>atSight</term>
+      <days />
+      <date />
+    </payment>
+    <isPartialShipment>true</isPartialShipment>
+    <isCSCConditions>true</isCSCConditions>
+    <CSCSalesDept>C22</CSCSalesDept>
+  </lcData>
+</CDSLcd>

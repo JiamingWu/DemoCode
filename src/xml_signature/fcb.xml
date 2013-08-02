@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<Root><test id="sign">Sign test...</test>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" Id="C007"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><ds:Reference URI="#sign"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>n1PTJdCjw55JxN8yYbSTIPxqcvU=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>TibTbSsUPDi4+s/yhhb27AOJ939SQY6+p2jhnfjSz6/8tH6BpEceIaN6VaTaQApe
+i8UNqNoYdSMf8N+dxgLwtgCkfXJeKDtekLL/2Ws6Cn13WbIRD8jfpyhvnppzrQyV
+ffS0DoL7c6I7v9XcVq4TgfGxn1HVKTfkcCC6G8LKlKQ=</ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509IssuerSerial><ds:X509IssuerName>C=TW,O=TAIWAN-CA.COM Inc.,OU=Evaluation Only,CN=TaiCA Test FXML CA</ds:X509IssuerName><ds:X509SerialNumber>1242722806</ds:X509SerialNumber></ds:X509IssuerSerial><ds:X509SubjectName>C=TW,O=Finance,OU=TaiCA Test FXML CA;70759028-TAIWAN-CA.COM Inc.;FXML,CN=05052322-01-FCBAPTEST</ds:X509SubjectName><ds:X509Certificate>MIIEuzCCA6OgAwIBAgIEShJx9jANBgkqhkiG9w0BAQUFADBhMQswCQYDVQQGEwJU
+VzEbMBkGA1UEChMSVEFJV0FOLUNBLkNPTSBJbmMuMRgwFgYDVQQLEw9FdmFsdWF0
+aW9uIE9ubHkxGzAZBgNVBAMTElRhaUNBIFRlc3QgRlhNTCBDQTAeFw0wOTA1MTkw
+ODQ2NDVaFw0xMTA2MDMwMDAwMDBaMIGRMQswCQYDVQQGEwJUVzEQMA4GA1UEChMH
+RmluYW5jZTEbMBkGA1UECxMSVGFpQ0EgVGVzdCBGWE1MIENBMSQwIgYDVQQLExs3
+MDc1OTAyOC1UQUlXQU4tQ0EuQ09NIEluYy4xDTALBgNVBAsTBEZYTUwxHjAcBgNV
+BAMTFTA1MDUyMzIyLTAxLUZDQkFQVEVTVDCBnzANBgkqhkiG9w0BAQEFAAOBjQAw
+gYkCgYEA4T0EkrqZshFyOamsk39vM3YYabLExaCG2my6C8gArvB1eAtMAZ3xHtBV
+xg1e5pP1rOHxFgiL0W9S21CQRhp37rQso59RoQmKRXYuJtmqo9+QXnMlt4n9Y15Q
+9fMmqNDjFc83fqCA3UdNbag9ipNWI6hxY288SO1L09asnGeuBPUCAwEAAaOCAcww
+ggHIMA4GA1UdDwEB/wQEAwIGwDBJBgNVHR8EQjBAMD6gPKA6hjhodHRwOi8vc3Ns
+X2V2YWwudGFpY2EuY29tLnR3L3VzZXIvRlhNTC9UZXN0X3Jldm9rZTk3LmNybDCB
+3gYDVR0gBIHWMIHTMIHQBghggR4DAQGHZzCBwzCBmwYIKwYBBQUHAgIwgY4agYtD
+bGFzcyAzLjEuMS4zLCBOb24tZmluYW5jaWFsIGFuZCBub24tIHNlY3VyaXRpZXMs
+IEp1c3QgZm9yIHRoZSBhdXRob3JpZWQgcmVseWluZyBwYXJ0eTogcmVmZXIgdG8g
+dGhlIDJuZCBPVSBvZiB0aGlzIGNlcnRpZmljYXRlIFN1YmplY3QgRE4uMCMGCCsG
+AQUFBwIBFhdodHRwOi8vY2EudGFpY2EuY29tLnR3LzA/BggrBgEFBQcBAQQzMDEw
+LwYIKwYBBQUHMAGGI2h0dHA6Ly9PQ1NQX0V2YWwuVGFpY2EuY29tLnR3OjgwMDEv
+MB8GA1UdIwQYMBaAFMbdTv6czZFge0CacmDQTFKvtloaMB0GA1UdDgQWBBRNyVsD
+/eeyW/YcpeuyUbNGRtkzSjAJBgNVHRMEAjAAMA0GCSqGSIb3DQEBBQUAA4IBAQAi
+CcI42FZaLM81mom1xBdrEcuAiTencg+x9E1pcSo6yzVA96IlJWdGq3MPeHtv/Xsa
+Z2vOoZrGSDtirkcAVMhZVA7g6pa+F7yBN4jZmrFb51Io+xy+pBQqFNNzENDyTu/a
+mpIu6wGvCyDjrK/Nw+Ndb1PpNbfyKXvcvzR4C7GiI3jV04a/Ca/eKVODITN3xEiI
+jEJE3wUsVV8rcWpHvz8JjtQX1UFn7TlmmCzjEk7fAGC2qrQi6P41Lqh8+PONxuKR
+B7erVOg7beewo5P8IyfG02cwtv2brFhvr4GwC20rIWbR8R1WDFPDNSV2CEo7ug3X
+2mshdjguyvoJgjxRp5xu</ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature></Root>
+

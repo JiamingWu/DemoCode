@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by Daphne Deng (Universal Exchange Inc) -->
+<xs:schema targetNamespace="http://www.uxcds.com/xmlschema/cds" xmlns:cds="http://www.uxcds.com/xmlschema/cds" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="allConditions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="conditionGroup" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="cds:conditions"/>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+            <xs:attribute name="code" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="conditions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="condition" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="title" type="xs:string"/>
+              <xs:element name="description" type="xs:string"/>
+              <xs:element name="prefixMessage" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+              <xs:choice>
+                <xs:element name="singleChoice" type="cds:SingleChoiceType"/>
+                <xs:element name="multiChoice" type="cds:MultiChoiceType"/>
+                <xs:element name="textBlank" type="cds:TextBlankType"/>
+                <xs:element name="textArea" type="cds:TextAreaType"/>
+                <xs:element name="textOnly" type="cds:TextOnlyType"/>
+              </xs:choice>
+              <xs:element name="suffixMessage" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+            <xs:attribute name="present" use="required">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="sight"/>
+                  <xs:enumeration value="usance"/>
+                  <xs:enumeration value="cross"/>
+                  <xs:enumeration value="general"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="type" use="required">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="singleChoice"/>
+                  <xs:enumeration value="multiChoice"/>
+                  <xs:enumeration value="textBlank"/>
+                  <xs:enumeration value="textArea"/>
+                  <xs:enumeration value="textOnly"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="used" use="required">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="true"/>
+                  <xs:enumeration value="false"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="changed" use="optional">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="true"/>
+                  <xs:enumeration value="false"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="SingleChoiceType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="item" type="cds:ItemType" maxOccurs="unbounded"/>
+      <xs:element name="messageSegment" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="MultiChoiceType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="item" type="cds:ItemType" maxOccurs="unbounded"/>
+      <xs:element name="messageSegment" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="TextBlankType">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="blank" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="name" type="xs:string" use="required"/>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element type="xs:string"  name="messageSegment" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="TextAreaType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="area" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="name" type="xs:string" use="required"/>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="messageSegment" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="TextOnlyType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element type="xs:string" name="messageSegment" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="ItemType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="itemValue" type="xs:string" use="required"/>
+        <xs:attribute name="checked" use="required">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true"/>
+              <xs:enumeration value="false"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BankType">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="code" type="xs:string" use="required"/>
+    <xs:attribute name="branchName" type="xs:string" use="required"/>
+    <xs:attribute name="branchCode" type="xs:string" use="required"/>
+    <xs:attribute name="address" type="xs:string" use="required"/>
+    <xs:attribute name="phone" type="xs:string" use="required"/>
+    <xs:attribute name="changed" use="optional">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="CompanyType">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="nameChanged" use="optional">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="regNo" type="xs:string" use="required"/>
+    <xs:attribute name="address" type="xs:string" use="required"/>
+    <xs:attribute name="addressChanged" use="optional">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="phone" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="AmountType">
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="chinese" type="xs:string" use="optional"/>
+    <xs:attribute name="changed" use="optional">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="CurrencyType">
+    <xs:attribute name="code" type="xs:string" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="RejectType">
+    <xs:attribute name="code" type="xs:string" use="optional"/>
+    <xs:attribute name="desc" type="xs:string" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="CPType">
+    <xs:sequence>
+      <xs:element name="cpNo" type="xs:string"/>
+      <xs:element name="issuingDate" type="xs:string"/>
+      <xs:element name="dueDate" type="xs:string"/>
+      <xs:element name="issuingBank" type="cds:BankType"/>
+      <xs:element name="cpAccount" type="xs:string"/>
+      <xs:element name="payingBank" type="cds:BankType"/>
+      <xs:element name="payer" type="cds:CompanyType"/>
+      <xs:element name="payerUndertaker" type="xs:string"/>
+      <xs:element name="beneficiary" type="cds:CompanyType"/>
+      <xs:element name="amount" type="cds:AmountType"/>
+      <xs:element name="currency" type="cds:CurrencyType"/>
+      <xs:element name="signet" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LcdType">
+    <xs:sequence>
+      <xs:element name="lcTitle" type="xs:string"/>
+      <xs:element name="lcType">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="sight"/>
+            <xs:enumeration value="usance"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="lcHeader" type="xs:string"/>
+      <xs:element name="lcNo" type="xs:string"/>
+      <xs:element name="issuingDate" type="xs:string"/>
+      <xs:element name="issuingBank" type="cds:BankType"/>
+      <xs:element name="advisingBank" type="cds:BankType"/>
+      <xs:element name="advisingDate" type="xs:string" minOccurs="0"/>
+      <xs:element name="advisingBankNo" type="xs:string"/>
+      <xs:element name="payingBank" type="cds:BankType"/>
+      <xs:element name="applicant" type="cds:CompanyType"/>
+      <xs:element name="beneficiary" type="cds:CompanyType"/>
+      <xs:element name="amount" type="cds:AmountType"/>
+      <xs:element name="currency" type="cds:CurrencyType" minOccurs="0"/>
+      <xs:element name="expiryDate">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="changed" use="optional">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="true"/>
+                    <xs:enumeration value="false"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="lcConditions" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="lcCond" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+</xs:element>
+<xs:element name="lcAdditionalConditions" minOccurs="0">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="lcAddCond" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+<xs:element ref="cds:conditions" minOccurs="0"/>
+<xs:element name="lcTail" type="xs:string"/>
+<xs:element name="advisingBankNotes" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LcdDataType">
+    <xs:sequence>
+      <xs:element name="payment">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="term">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="atSight"/>
+                  <xs:enumeration value="atDaysAfterSight"/>
+                  <xs:enumeration value="atDaysAfterDate"/>
+                  <xs:enumeration value="onDate"/>
+                  <xs:enumeration value="atDaysAfterBLDate"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element name="days" type="xs:string" minOccurs="0"/>
+            <xs:element name="date" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+</xs:element>
+<xs:element name="isPartialShipment">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="true"/>
+      <xs:enumeration value="false"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+<xs:element name="isCSCConditions">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="true"/>
+      <xs:enumeration value="false"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+<xs:element name="CSCSalesDept" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LcdInfoType">
+    <xs:attribute name="appNo" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="LcdAppInfoType">
+    <xs:attribute name="appNo" type="xs:string" use="required"/>
+    <xs:attribute name="appDate" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="LcdAmendInfoType">
+    <xs:attribute name="appNo" type="xs:string" use="required"/>
+    <xs:attribute name="amendNo" type="xs:string" use="required"/>
+    <xs:attribute name="amendCount" type="xs:string" use="required"/>
+    <xs:attribute name="amendDate" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="LcdAmendItemType">
+    <xs:sequence>
+      <xs:element name="itemName" type="xs:string"/>
+      <xs:element name="oldValue" type="xs:string"/>
+      <xs:element name="newValue" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LcdAmendmentsType">
+    <xs:sequence>
+      <xs:element name="lcAmendmentItem" type="cds:LcdAmendItemType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LcdAdvInfoType">
+    <xs:attribute name="appNo" type="xs:string" use="required"/>
+    <xs:attribute name="amendNo" type="xs:string" use="required"/>
+    <xs:attribute name="amendCount" type="xs:string" use="required"/>
+    <xs:attribute name="advNo" type="xs:string" use="required"/>
+    <xs:attribute name="advDate" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="LcdCancDataType">
+    <xs:sequence>
+      <xs:element name="availableAmount" type="cds:AmountType"/>
+      <xs:element name="currency" type="cds:CurrencyType" minOccurs="0"/>
+      <xs:element name="promiser" type="xs:string"/>
+      <xs:element name="undertaker" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LcdCancInfoType">
+    <xs:attribute name="appNo" type="xs:string" use="required"/>
+    <xs:attribute name="cancNo" type="xs:string" use="required"/>
+    <xs:attribute name="cancDate" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="LcdReplyInfoType">
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="appNo" type="xs:string" use="optional"/>
+    <xs:attribute name="lcNo" type="xs:string" use="optional"/>
+    <xs:attribute name="amendNo" type="xs:string" use="optional"/>
+    <xs:attribute name="cancNo" type="xs:string" use="optional"/>
+    <xs:attribute name="advNo" type="xs:string" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="LcdReplyDataType">
+    <xs:sequence>
+      <xs:element name="status" type="xs:string"/>
+      <xs:element name="reject" type="cds:RejectType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CDSLcd">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="lcInfo" type="cds:LcdInfoType"/>
+        <xs:element name="lcDoc" type="cds:LcdType"/>
+        <xs:element name="cpDoc" type="cds:CPType" minOccurs="0"/>
+        <xs:element name="lcData" type="cds:LcdDataType"/>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" use="required" fixed="1.0"/>
+    </xs:complexType>
+</xs:element>
+</xs:schema>

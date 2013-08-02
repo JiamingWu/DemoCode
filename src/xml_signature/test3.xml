@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><J2SP>
+	<BkId>007</BkId>
+	<FILENAME>WXD2SB29.XML</FILENAME>
+	<TABLENAME>WXD2SB29</TABLENAME>
+	<FLAG>1</FLAG>
+	<ITEM id="sign"><WXD2SB29 AMT="60000" BENEFCOCNM="台灣塑膠工業股份有限公司" BENFADR="高雄市中山三路39號" BENFDIV="1" BENFRFNO="75708007" BKCHKCOMT="" BKCHKTM="20100831155427" CTMNM="台塑測試人" CTMTEL="23962339" CUAPLCOMT="特別指示:受益人提示發票影本可接受......" CUCOCNM="正德企業股份有限公司" CUCY="TWD" CUNO="123456" DLEDDAT="20100831" DSRCONT="正德貨物名稱內容一，測試修改標題用" EFFDDAT="20100930" EIVMK="Y" IVADRMK="Y" IVAMTMK="Y" IVDATMK="Y" LCAPLTM="" LCBK="0071509" LCBKACID="0071509" LCNO="A1509142" LCPESRFNO="24019802" LCSQNO="01" PAMK="Y" PAYCKMK="Y" PAYTY="A" TRNTM="20100831"/></ITEM>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:SignedInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"/>
+<ds:Reference URI="#sign" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:Transforms xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"/>
+<ds:DigestValue xmlns:ds="http://www.w3.org/2000/09/xmldsig#">0TLlCYOs//fP6ElVm+8we7hzYrM=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+q7/GunEQQswhgTRjaFa92t+8+3Mh4ENfDq8hx+WdSafMVxy32k25rzXzGhO3cu3nUPev4envNrpd
+lhXCYvgehL+NdRLTlj6iIFPFlVjSuSBmbsTLSX1PbeQoiC3phUafzhObT81QsELVMBBl45kTwEA+
+qW8aHGPVNQKTHGtORFY=
+</ds:SignatureValue>
+<ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:X509Data xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:X509Certificate xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+MIIDyDCCAzGgAwIBAgIES/JbUDANBgkqhkiG9w0BAQUFADBtMQswCQYDVQQGEwJUVzEbMBkGA1UE
+ChMSVEFJV0FOLUNBLkNPTSBJbmMuMScwJQYDVQQLEx5DZXJ0aWZpY2F0aW9uIFNlcnZpY2UgUHJv
+dmlkZXIxGDAWBgNVBAMTD1RhaUNBIFNlY3VyZSBDQTAeFw0xMDA1MTgwOTE4MDhaFw0xMTA1MjAx
+NTU5NTlaMIHGMQswCQYDVQQGEwJUVzEYMBYGA1UEChMPVGFpQ0EgU2VjdXJlIENBMScwJQYDVQQK
+Ex5DZXJ0aWZpY2F0aW9uIFNlcnZpY2UgUHJvdmlkZXIxHzAdBgNVBAsTFnVuaXZlcnNhbCBleGNo
+YW5nZSBDRFMxGTAXBgNVBAsTEDcwNzYyNDE5LVJBLVVYUkExEjAQBgNVBAMTCWVOSURURVNUMjEk
+MCIGCSqGSIb3DQEJARYVY2RzX3NlcnZpY2VAdXhiMmIuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GN
+ADCBiQKBgQC8ylSxZ3GX6yxfl7/Ld2OmizWkw3KM0HC/vDjtKraGlPqloOTp4g7q8x0SzIBTl4U6
+YIPz8myhHNlTdvuA1B4mossj4dRwHVOFAgmG++sksXyyy/pxdgI1leOrXoadg8fzPQCaGwPln8AF
+p53sSD5MUwwt4PccoKZ015MDjk83bwIDAQABo4IBGTCCARUwDgYDVR0PAQH/BAQDAgTwMEQGA1Ud
+HwQ9MDswOaA3oDWGM2h0dHA6Ly9zc2wudGFpY2EuY29tLnR3L3VzZXIvc3NsL2VjcGx1c19yZXZv
+a2U5LmNybDByBgNVHSAEazBpMGcGB2CGdgMBAwEwXDAtBggrBgEFBQcCAjAhGh9odHRwczovL3d3
+dy50d2NhLmNvbS50dy9jcHMuYXNwMCsGCCsGAQUFBwIBFh9odHRwczovL3d3dy50d2NhLmNvbS50
+dy9jcHMuYXNwMB8GA1UdIwQYMBaAFBP7fUUHNdA+QcaTF8GRC9MQnMHyMB0GA1UdDgQWBBSXXBAM
+sCHVXOIGSGDibx49BOfkNDAJBgNVHRMEAjAAMA0GCSqGSIb3DQEBBQUAA4GBAAMD8efPKxmetEgi
+QU4JHOS7NJ+DFnwLtGiAamk8N9Ul47snyv/NdWobqD7jAUdI5O/eJ9OCUWkjO7TRpitH0hzd4JGx
+1xW+FJXqIk/CuG6u9wQ9jo+WF2Rmuq+RKBfhoT1TwTMZqXKlelsuV2wqhTkXaUNiNVzCkSwyv9hY
+6SCQ
+</ds:X509Certificate>
+</ds:X509Data>
+<ds:KeyValue xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:RSAKeyValue xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:Modulus xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+vMpUsWdxl+ssX5e/y3djpos1pMNyjNBwv7w47Sq2hpT6paDk6eIO6vMdEsyAU5eFOmCD8/JsoRzZ
+U3b7gNQeJqLLI+HUcB1ThQIJhvvrJLF8ssv6cXYCNZXjq16GnYPH8z0AmhsD5Z/ABaed7Eg+TFMM
+LeD3HKCmdNeTA45PN28=
+</ds:Modulus>
+<ds:Exponent xmlns:ds="http://www.w3.org/2000/09/xmldsig#">AQAB</ds:Exponent>
+</ds:RSAKeyValue>
+</ds:KeyValue>
+</ds:KeyInfo>
+</ds:Signature></J2SP>
