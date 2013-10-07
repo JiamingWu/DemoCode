@@ -7,248 +7,248 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
- * ¶€¶Ê∞—¶“∫t∫‚™kπÍß@ DES
+ * Ëá™Ë°åÂèÉËÄÉÊºîÁÆóÊ≥ïÂØ¶‰Ωú DES
  */
 public class DES {
 
-	public static void main(String[] args) throws Exception {
-		DES des = new DES();
-		des.action();
-	}
-	
-	public void action() throws Exception {
-		
-		SecretKey secretKey = genKey();
-		byte[] key = secretKey.getEncoded();
-		byte[] data = "§@§G§T•|§≠§ª§C§K".getBytes("big5");
-		
-		System.out.println("====== DES/ECB/NoPadding encrypt=======");
-		byte[] result1 = des_ecb_noPadding(data, key, true);
-		System.out.println(toHex(result1));
-		
-		Cipher cipher = Cipher.getInstance("DES/ECB/NoPadding");  
-		cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-		byte[] result2 = cipher.doFinal(data);
-		System.out.println(toHex(result2));
-		System.out.println("∏—±K:" + new String(des_ecb_noPadding(result1, key, false), "big5"));
-		
-		System.out.println("====== DES/ECB/PKCS5Padding encrypt=======");
-		result1 = des_pkcs5Padding(null, data, key, true);
-		System.out.println(toHex(result1));
-		
-		cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");  
-		cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-		result2 = cipher.doFinal(data);
-		System.out.println(toHex(result2));
-		System.out.println("∏—±K:" + new String(des_pkcs5Padding(null, result1, key, false), "big5"));
-		
-		System.out.println("====== DES/CBC/PKCS5Padding encrypt=======");
-		byte[] iv = "ABCD1234".getBytes();
-		result1 = des_pkcs5Padding(iv, data, key, true);
-		System.out.println(toHex(result1));
-		
-		AlgorithmParameterSpec paramSpec = new IvParameterSpec(iv);
-		cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
-		cipher.init(Cipher.ENCRYPT_MODE, secretKey, paramSpec);
-		result2 = cipher.doFinal(data);
-		System.out.println(toHex(result2));
-		System.out.println("∏—±K:" + new String(des_pkcs5Padding(iv, result1, key, false), "big5"));
-	}
-	
-	public byte[] xor(byte[] b1, byte[] b2) {
-		byte[] result = new byte[8];
-		for (int i=0; i<8; i++) {
-			result[i] = (byte)(b1[i] ^ b2[i]);
-		}
-		return result;
-	}
-	
-	public byte[] des_ecb_noPadding(byte[] data, byte[] key, boolean encrypt) throws Exception {
-		return des(null, data, key, encrypt);
-	}
-	
-	public byte[] des(byte[] iv, byte[] data, byte[] key, boolean encrypt) throws Exception {
-		if (data.length % 8 != 0) {
-			System.out.println("ERR:∏ÍÆ∆™¯´◊•≤∂∑¨∞8™∫≠øº∆");
-			return null;
-		}
-		byte[] block = new byte[8];
-		byte[] result = new byte[data.length];
-		for (int i=0; i<data.length/8; i++) {
-			System.arraycopy(data, i*8, block, 0, 8);
-			if (encrypt && iv != null) {
-				block = xor(block, iv);
-			}
-			byte[] r = des(block, key, encrypt);
-			if (iv != null) {
-				if (encrypt) {
-					iv = r;
-				} else {
-					r = xor(r, iv);
-					System.arraycopy(block, 0, iv, 0, 8);
-				}
-			}
-			System.arraycopy(r, 0, result, i*8, 8);
-		}
-		return result;
-	}
-	
-	/**
-	 * PKCS5Padding, ∑Ì§@≠” block •º∫° 8 ≠” bytes, ¶pÆt 3 ≠” bytes, ´h•H 3 ∂Ò∫°.
-	 * ∑Ì≠Ë¶n¨∞ 8 ≠” bytes, ´h¶h∏…§W§@≠” block, •H 8 ∂Ò∫° (∑NßY®œ•ŒPKCS5Padding, §@©w∑|¶≥ padding)
-	 * 
-	 * PKCS7Padding ªP PKCS5Padding ¨€¶P, ¶˝ PKCS7Padding ®S≥W©w block §@©w•uØ‡ 8 ≠” bytes.
-	 * ®‰ block ∞œ∂Ù™∫ bytes ¨O•i≈‹∞ ™∫.
-	 */
-	public byte[] des_pkcs5Padding(byte[] iv, byte[] data, byte[] key, boolean encrypt) throws Exception {
-		byte[] newData = data;
-		if (encrypt) {
-			int tmp = data.length % 8;
-			if (tmp == 0) {
-				tmp = 8;
-			}
-			newData = new byte[data.length + tmp];
-			Arrays.fill(newData, (byte)tmp);
-			System.arraycopy(data, 0, newData, 0, data.length);
-		}
-		byte[] result = des(iv, newData, key, encrypt);
-		if (!encrypt) {
-			//•h±º´·≠±§ß padding
-			System.out.println(toHex(result));
-			int value = result[result.length-1];
-			byte[] newResult = new byte[result.length-value];
-			System.arraycopy(result, 0, newResult, 0, newResult.length);
-			result = newResult;
-		}
-		return result;
-	}
-	
-	/**
-	 * DES •[±K∞œ∂Ù¨∞ 64 bits
-	 */
-	public byte[] des(byte[] data, byte[] key, boolean encrypt) throws Exception {
-		//±N data ªP key Æi∂}¨∞ bit[]
-		byte[] tmp = new byte[data.length * 8];
-		for (int i=0; i<data.length; i++) {
-			tmp[i*8+0] = (byte)((data[i] & 128)>>> 7);
-			tmp[i*8+1] = (byte)((data[i] & 64) >>> 6);
-			tmp[i*8+2] = (byte)((data[i] & 32) >>> 5);
-			tmp[i*8+3] = (byte)((data[i] & 16) >>> 4);
-			tmp[i*8+4] = (byte)((data[i] & 8) >>> 3);
-			tmp[i*8+5] = (byte)((data[i] & 4) >>> 2);
-			tmp[i*8+6] = (byte)((data[i] & 2) >>> 1);
-			tmp[i*8+7] = (byte)(data[i] & 1);
-		}
-		data = tmp;
-//		System.out.print("data:");
-//		for (int i=0;i<data.length;i++) {
-//			System.out.print(data[i]);
-//		}
-//		System.out.println();
-		tmp = new byte[key.length * 8];
-		for (int i=0; i<key.length; i++) {
-			tmp[i*8+0] = (byte)((key[i] & 128)>>> 7);
-			tmp[i*8+1] = (byte)((key[i] & 64) >>> 6);
-			tmp[i*8+2] = (byte)((key[i] & 32) >>> 5);
-			tmp[i*8+3] = (byte)((key[i] & 16) >>> 4);
-			tmp[i*8+4] = (byte)((key[i] & 8) >>> 3);
-			tmp[i*8+5] = (byte)((key[i] & 4) >>> 2);
-			tmp[i*8+6] = (byte)((key[i] & 2) >>> 1);
-			tmp[i*8+7] = (byte)(key[i] & 1);
-		}
-		key = tmp;
-		
-		int[] ip = {58, 50, 42, 34, 26, 18, 10, 2,
-					60, 52, 44, 36, 28, 20, 12, 4,
-					62, 54, 46, 38, 30, 22, 14, 6,
-					64, 56, 48, 40, 32, 24, 16, 8,
-					57, 49, 41, 33, 25, 17,  9, 1,
-					59, 51, 43, 35, 27, 19, 11, 3,
-					61, 53, 45, 37, 29, 21, 13, 5,
-					63, 55, 47, 39, 31, 23, 15, 7};
-		int[] fp = {40, 8, 48, 16, 56, 24, 64, 32,
-					39, 7, 47, 15, 55, 23, 63, 31,
-					38, 6, 46, 14, 54, 22, 62, 30,
-					37, 5, 45, 13, 53, 21, 61, 29,
-					36, 4, 44, 12, 52, 20, 60, 28,
-					35, 3, 43, 11, 51, 19, 59, 27,
-					34, 2, 42, 10, 50, 18, 58, 26,
-					33, 1, 41,  9, 49, 17, 57, 25};
-		
-		//1. ™Ï©l±∆¶C IP
-		byte[] newData = new byte[64];
-		for (int i = 0; i < ip.length; i++) {
-			newData[i] = data[ip[i]-1];
-		}
-		byte[] L = new byte[32];
-		byte[] R = new byte[32];
-		for (int i = 0; i < 32; i++) {
-			L[i] = newData[i];
-			R[i] = newData[i+32];
-		}
-		
-		//2. ≤£•Õ§l∆_∞Õ
-		byte[][] subKeys = genSubKey(key);
-		
-		//3. •[±K≥B≤z
-		for (int i=0; i<16; i++) {
-//			System.out.print(i + ")R==>");
-//			for (int j=0;j<32; j++) {
-//				System.out.print(R[j]);
-//			}
-//			System.out.println();
-			byte[] subKey;
-			if (encrypt) {
-				subKey = subKeys[i];
-			} else {
-				subKey = subKeys[15-i];
-			}
-			byte[] R1 = new byte[32];
-			byte[] f = F(R, subKey);
-			for (int j=0; j<32; j++) {
-				R1[j] = (byte)(L[j] != f[j] ? 1 : 0);
-			}
-			L = R;
-			R = R1;
-		}
-		byte[] newData1 = new byte[64];
-		for (int i=0; i<32; i++) {
-			newData1[i] = R[i];
-			newData1[i+32] = L[i];
-		}
-		
-		//4. ≤◊µ≤±∆¶C FP
-		byte[] result = new byte[64];
-		for (int i = 0; i < fp.length; i++) {
-			result[i] = newData1[fp[i]-1];
-		}
-		
-//		System.out.print("FP==>");
-//		for (int j=0;j<64; j++) {
-//			System.out.print(result[j]);
-//		}
-//		System.out.println();
-		
-		//±N±K§Â•— bit[] ¶^®Ï byte[]
-		byte[] result2 = new byte[8];
-		for (int i=0; i<8; i++) {
-			result2[i] = (byte)(result[i*8+0] * 128 + 
-					result[i*8+1] * 64 + 
-					result[i*8+2] * 32 +
-					result[i*8+3] * 16 +
-					result[i*8+4] * 8 + 
-					result[i*8+5] * 4 + 
-					result[i*8+6] * 2 + 
-					result[i*8+7]);
-		}
-		
-		return result2;
-	}
-	
-	private byte[] F(byte[] data, byte[] key) {
-		int[] ex = {32, 1, 2, 3, 4, 5,
+    public static void main(String[] args) throws Exception {
+        DES des = new DES();
+        des.action();
+    }
+    
+    public void action() throws Exception {
+        
+        SecretKey secretKey = genKey();
+        byte[] key = secretKey.getEncoded();
+        byte[] data = "‰∏Ä‰∫å‰∏âÂõõ‰∫îÂÖ≠‰∏ÉÂÖ´".getBytes("big5");
+        
+        System.out.println("====== DES/ECB/NoPadding encrypt=======");
+        byte[] result1 = des_ecb_noPadding(data, key, true);
+        System.out.println(toHex(result1));
+        
+        Cipher cipher = Cipher.getInstance("DES/ECB/NoPadding");  
+        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+        byte[] result2 = cipher.doFinal(data);
+        System.out.println(toHex(result2));
+        System.out.println("Ëß£ÂØÜ:" + new String(des_ecb_noPadding(result1, key, false), "big5"));
+        
+        System.out.println("====== DES/ECB/PKCS5Padding encrypt=======");
+        data = "‰∏Ä‰∫å‰∏âÂõõ‰∫îÂÖ≠‰∏ÉÂÖ´‰πù".getBytes("big5");
+        result1 = des_pkcs5Padding(null, data, key, true);
+        System.out.println(toHex(result1));
+        
+        cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");  
+        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+        result2 = cipher.doFinal(data);
+        System.out.println(toHex(result2));
+        System.out.println("Ëß£ÂØÜ:" + new String(des_pkcs5Padding(null, result1, key, false), "big5"));
+        
+        System.out.println("====== DES/CBC/PKCS5Padding encrypt=======");
+        byte[] iv = "ABCD1234".getBytes();
+        result1 = des_pkcs5Padding(iv, data, key, true);
+        System.out.println(toHex(result1));
+        
+        AlgorithmParameterSpec paramSpec = new IvParameterSpec(iv);
+        cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, secretKey, paramSpec);
+        result2 = cipher.doFinal(data);
+        System.out.println(toHex(result2));
+        System.out.println("Ëß£ÂØÜ:" + new String(des_pkcs5Padding(iv, result1, key, false), "big5"));
+    }
+    
+    public byte[] xor(byte[] b1, byte[] b2) {
+        byte[] result = new byte[8];
+        for (int i=0; i<8; i++) {
+            result[i] = (byte)(b1[i] ^ b2[i]);
+        }
+        return result;
+    }
+    
+    public byte[] des_ecb_noPadding(byte[] data, byte[] key, boolean encrypt) throws Exception {
+        return des(null, data, key, encrypt);
+    }
+    
+    public byte[] des(byte[] iv, byte[] data, byte[] key, boolean encrypt) throws Exception {
+        if (data.length % 8 != 0) {
+            System.out.println("ERR:Ë≥áÊñôÈï∑Â∫¶ÂøÖÈ†àÁÇ∫8ÁöÑÂÄçÊï∏");
+            return null;
+        }
+        byte[] block = new byte[8];
+        byte[] result = new byte[data.length];
+        for (int i=0; i<data.length/8; i++) {
+            System.arraycopy(data, i*8, block, 0, 8);
+            if (encrypt && iv != null) {
+                block = xor(block, iv);
+            }
+            byte[] r = des(block, key, encrypt);
+            if (iv != null) {
+                if (encrypt) {
+                    iv = r;
+                } else {
+                    r = xor(r, iv);
+                    System.arraycopy(block, 0, iv, 0, 8);
+                }
+            }
+            System.arraycopy(r, 0, result, i*8, 8);
+        }
+        return result;
+    }
+    
+    /**
+     * PKCS5Padding, Áï∂‰∏ÄÂÄã block Êú™Êªø 8 ÂÄã bytes, Â¶ÇÂ∑Æ 3 ÂÄã bytes, Ââá‰ª• 3 Â°´Êªø.
+     * Áï∂ÂâõÂ•ΩÁÇ∫ 8 ÂÄã bytes, ÂâáÂ§öË£ú‰∏ä‰∏ÄÂÄã block, ‰ª• 8 Â°´Êªø (ÊÑèÂç≥‰ΩøÁî®PKCS5Padding, ‰∏ÄÂÆöÊúÉÊúâ padding)
+     * 
+     * PKCS7Padding Ëàá PKCS5Padding Áõ∏Âêå, ‰ΩÜ PKCS7Padding Ê≤íË¶èÂÆö block ‰∏ÄÂÆöÂè™ËÉΩ 8 ÂÄã bytes.
+     * ÂÖ∂ block ÂçÄÂ°äÁöÑ bytes ÊòØÂèØËÆäÂãïÁöÑ.
+     */
+    public byte[] des_pkcs5Padding(byte[] iv, byte[] data, byte[] key, boolean encrypt) throws Exception {
+        byte[] newData = data;
+        if (encrypt) {
+            int blockSize = 8;
+            int tmp = blockSize - data.length % blockSize;
+            newData = new byte[data.length + tmp];
+            Arrays.fill(newData, (byte)tmp);
+            System.arraycopy(data, 0, newData, 0, data.length);
+        }
+        byte[] result = des(iv, newData, key, encrypt);
+        if (!encrypt) {
+            //ÂéªÊéâÂæåÈù¢‰πã padding
+            //System.out.println(toHex(result));
+            int value = result[result.length-1];
+            byte[] newResult = new byte[result.length-value];
+            System.arraycopy(result, 0, newResult, 0, newResult.length);
+            result = newResult;
+        }
+        return result;
+    }
+    
+    /**
+     * DES Âä†ÂØÜÂçÄÂ°äÁÇ∫ 64 bits
+     */
+    public byte[] des(byte[] data, byte[] key, boolean encrypt) throws Exception {
+        //Â∞á data Ëàá key Â±ïÈñãÁÇ∫ bit[]
+        byte[] tmp = new byte[data.length * 8];
+        for (int i=0; i<data.length; i++) {
+            tmp[i*8+0] = (byte)((data[i] & 128)>>> 7);
+            tmp[i*8+1] = (byte)((data[i] & 64) >>> 6);
+            tmp[i*8+2] = (byte)((data[i] & 32) >>> 5);
+            tmp[i*8+3] = (byte)((data[i] & 16) >>> 4);
+            tmp[i*8+4] = (byte)((data[i] & 8) >>> 3);
+            tmp[i*8+5] = (byte)((data[i] & 4) >>> 2);
+            tmp[i*8+6] = (byte)((data[i] & 2) >>> 1);
+            tmp[i*8+7] = (byte)(data[i] & 1);
+        }
+        data = tmp;
+//      System.out.print("data:");
+//      for (int i=0;i<data.length;i++) {
+//          System.out.print(data[i]);
+//      }
+//      System.out.println();
+        tmp = new byte[key.length * 8];
+        for (int i=0; i<key.length; i++) {
+            tmp[i*8+0] = (byte)((key[i] & 128)>>> 7);
+            tmp[i*8+1] = (byte)((key[i] & 64) >>> 6);
+            tmp[i*8+2] = (byte)((key[i] & 32) >>> 5);
+            tmp[i*8+3] = (byte)((key[i] & 16) >>> 4);
+            tmp[i*8+4] = (byte)((key[i] & 8) >>> 3);
+            tmp[i*8+5] = (byte)((key[i] & 4) >>> 2);
+            tmp[i*8+6] = (byte)((key[i] & 2) >>> 1);
+            tmp[i*8+7] = (byte)(key[i] & 1);
+        }
+        key = tmp;
+        
+        int[] ip = {58, 50, 42, 34, 26, 18, 10, 2,
+                    60, 52, 44, 36, 28, 20, 12, 4,
+                    62, 54, 46, 38, 30, 22, 14, 6,
+                    64, 56, 48, 40, 32, 24, 16, 8,
+                    57, 49, 41, 33, 25, 17,  9, 1,
+                    59, 51, 43, 35, 27, 19, 11, 3,
+                    61, 53, 45, 37, 29, 21, 13, 5,
+                    63, 55, 47, 39, 31, 23, 15, 7};
+        int[] fp = {40, 8, 48, 16, 56, 24, 64, 32,
+                    39, 7, 47, 15, 55, 23, 63, 31,
+                    38, 6, 46, 14, 54, 22, 62, 30,
+                    37, 5, 45, 13, 53, 21, 61, 29,
+                    36, 4, 44, 12, 52, 20, 60, 28,
+                    35, 3, 43, 11, 51, 19, 59, 27,
+                    34, 2, 42, 10, 50, 18, 58, 26,
+                    33, 1, 41,  9, 49, 17, 57, 25};
+        
+        //1. ÂàùÂßãÊéíÂàó IP
+        byte[] newData = new byte[64];
+        for (int i = 0; i < ip.length; i++) {
+            newData[i] = data[ip[i]-1];
+        }
+        byte[] L = new byte[32];
+        byte[] R = new byte[32];
+        for (int i = 0; i < 32; i++) {
+            L[i] = newData[i];
+            R[i] = newData[i+32];
+        }
+        
+        //2. Áî¢ÁîüÂ≠êÈë∞Âåô
+        byte[][] subKeys = genSubKey(key);
+        
+        //3. Âä†ÂØÜËôïÁêÜ
+        for (int i=0; i<16; i++) {
+//          System.out.print(i + ")R==>");
+//          for (int j=0;j<32; j++) {
+//              System.out.print(R[j]);
+//          }
+//          System.out.println();
+            byte[] subKey;
+            if (encrypt) {
+                subKey = subKeys[i];
+            } else {
+                subKey = subKeys[15-i];
+            }
+            byte[] R1 = new byte[32];
+            byte[] f = F(R, subKey);
+            for (int j=0; j<32; j++) {
+                R1[j] = (byte)(L[j] != f[j] ? 1 : 0);
+            }
+            L = R;
+            R = R1;
+        }
+        byte[] newData1 = new byte[64];
+        for (int i=0; i<32; i++) {
+            newData1[i] = R[i];
+            newData1[i+32] = L[i];
+        }
+        
+        //4. ÁµÇÁµêÊéíÂàó FP
+        byte[] result = new byte[64];
+        for (int i = 0; i < fp.length; i++) {
+            result[i] = newData1[fp[i]-1];
+        }
+        
+//      System.out.print("FP==>");
+//      for (int j=0;j<64; j++) {
+//          System.out.print(result[j]);
+//      }
+//      System.out.println();
+        
+        //Â∞áÂØÜÊñáÁî± bit[] ÂõûÂà∞ byte[]
+        byte[] result2 = new byte[8];
+        for (int i=0; i<8; i++) {
+            result2[i] = (byte)(result[i*8+0] * 128 + 
+                    result[i*8+1] * 64 + 
+                    result[i*8+2] * 32 +
+                    result[i*8+3] * 16 +
+                    result[i*8+4] * 8 + 
+                    result[i*8+5] * 4 + 
+                    result[i*8+6] * 2 + 
+                    result[i*8+7]);
+        }
+        
+        return result2;
+    }
+    
+    private byte[] F(byte[] data, byte[] key) {
+        int[] ex = {32, 1, 2, 3, 4, 5,
                 4, 5, 6, 7, 8, 9,
                 8, 9,10,11,12,13,
                12,13,14,15,16,17,
@@ -256,7 +256,7 @@ public class DES {
                20,21,22,23,24,25,
                24,25,26,27,28,29,
                28,29,30,31,32, 1};
-		int[][] sbox = {{14,4,13,1,2,15,11,8,3,10,6,12,5,9,0,7, // s1
+        int[][] sbox = {{14,4,13,1,2,15,11,8,3,10,6,12,5,9,0,7, // s1
             0,15,7,4,14,2,13,1,10,6,12,11,9,5,3,8,
             4,1,14,8,13,6,2,11,15,12,9,7,3,10,5,0,
             15,12,8,2,4,9,1,7,5,11,3,14,10,0,6,13},
@@ -288,149 +288,152 @@ public class DES {
             1,15,13,8,10,3,7,4,12,5,6,11,0,14,9,2,
             7,11,4,1,9,12,14,2,0,6,10,13,15,3,5,8,
             2,1,14,7,4,10,8,13,15,12,9,0,3,5,6,11}};
-		int[] p = {16, 7,20,21,
-		           29,12,28,17,
-		            1,15,23,26,
-		            5,18,31,10,
-		            2, 8,24,14,
-		            32,27,3,9,
-		            19,13,30,6,
-		            22,11,4,25 };
-		byte[] newData = new byte[48];
-		for (int i = 0; i < ex.length; i++) {
-			newData[i] = (byte) (data[ex[i]-1] != key[i] ? 1 : 0);
-		}
-		byte[][] s = new byte[8][6];
-		int idx = 0;
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 6; j++) {
-				s[i][j] = newData[idx++];
-			}
-		}
-		byte[] newData1 = new byte[32];
-		idx = 0;
-		for (int i=0; i<s.length; i++) {
-			int r = s[i][0] * 2 + s[i][5];
-			int q = s[i][1] * 8 + s[i][2] * 4 + s[i][3] * 2 + s[i][4];
-			int v = sbox[i][r*16+q];
-			newData1[idx++] = (byte)((v&8) >> 3);
-			newData1[idx++] = (byte)((v&4) >> 2);
-			newData1[idx++] = (byte)((v&2) >> 1);
-			newData1[idx++] = (byte)(v&1);
-		}
-		byte[] result = new byte[32];
-		for (int i = 0; i < p.length; i++) {
-			result[i] = newData1[p[i]-1];
-		}
-		return result;
-	}
-	
-	private byte[][] genSubKey(byte[] key) {
-		
-//		System.out.print("•Dkey:");
-//		for (int j=0;j<64; j++) {
-//			System.out.print(key[j]);
-//		}
-//		System.out.println();
-		
-		int[] pc1 = {57,49,41,33,25,17,9,
-	              1,58,50,42,34,26,18,
-	              10,2,59,51,43,35,27,
-	              19,11,3,60,52,44,36,
-	              63,55,47,39,31,23,15,
-	              7,62,54,46,38,30,22,
-	              14,6,61,53,45,37,29,
-	              21,13,5,28,20,12,4};
-		int[] pc2 = {14,17,11,24,1,5,
-	              3,28,15,6,21,10,
-	              23,19,12,4,26,8,
-	              16,7,27,20,13,2,
-	              41,52,31,37,47,55,
-	              30,40,51,45,33,48,
-	              44,49,39,56,34,53,
-	              46,42,50,36,29,32};
-		int[] ls = {1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1};
-		byte[] C = new byte[28];
-		byte[] D = new byte[28];
-		for (int i=0; i<28; i++) {
-			C[i] = key[pc1[i]-1];
-			D[i] = key[pc1[i+28]-1];
-		}
-		byte[][] subKeys = new byte[16][48];
-		for (int i=0; i<16; i++) {
-			byte[] C1 = new byte[28];
-			byte[] D1 = new byte[28];
-			for (int j=0; j<28 - ls[i]; j++) {
-				C1[j] = C[j + ls[i]];
-				D1[j] = D[j + ls[i]];
-			}
-			for (int j=0; j<ls[i]; j++) {
-				C1[28 - ls[i] + j] = C[j];
-				D1[28 - ls[i] + j] = D[j];
-			}
-			byte[] newData1 = new byte[56];
-			for (int j=0; j<28; j++) {
-				newData1[j] = C1[j];
-				newData1[j+28] = D1[j];
-			}
-			for (int j=0; j<48; j++) {
-				subKeys[i][j] = newData1[pc2[j]-1];
-			}
-			C = C1;
-			D = D1;
-		}
-		
-//		for (int i=0; i<16; i++) {
-//			System.out.print("≤ƒ" + (i<10?"0" :"") + i + "ß‚:");
-//			for (int j=0;j<48; j++) {
-//				System.out.print(subKeys[i][j]);
-//			}
-//			System.out.println();
-//		}
-		return subKeys;
-	}
-	
-	/**
-	 * DES ™∫ key ¨∞ 8 bytes, ®C byte ≥Ã´·§@ΩX¨∞¶P¶Ï§∏¿À¨dΩX, ¨GØu•ø™∫ key ¨∞ 56 bits
-	 */
-	private SecretKey genKey() throws Exception {
-		KeyGenerator keyGen = KeyGenerator.getInstance("DES");
-		//SecureRandom random = SecureRandom.getInstance("SHA1PRNG", "SUN");
-		//keyGen.init(56, random);
-		keyGen.init(56);
-		
-		//≥zπL provider gen key
-		//SecretKey secretKey = keyGen.generateKey();
-		
-		//¶€¶Ê´¸©w key
-		SecretKey secretKey = new SecretKey() {
-			public String getFormat() {
-				return "RAW";
-			}
-			public byte[] getEncoded() {
-				return "12345678".getBytes();
-			}
-			public String getAlgorithm() {
-				return "DES";
-			}
-		};
-		
-		return secretKey;
-	}
-	
-	private String toHex(byte[] data) {
-		String result = "";
-		for (int i = 0; i < data.length; i++) {
-			int v = data[i];
-			if (v < 0) {
-				v += 256;
-			}
-			String v1 = Integer.toHexString(v);
-			if (v1.length() == 1) {
-				v1 = "0" + v1;
-			}
-			result += v1;
-		}
-		return result.toUpperCase();
-	}
+        int[] p = {16, 7,20,21,
+                   29,12,28,17,
+                    1,15,23,26,
+                    5,18,31,10,
+                    2, 8,24,14,
+                    32,27,3,9,
+                    19,13,30,6,
+                    22,11,4,25 };
+        byte[] newData = new byte[48];
+        for (int i = 0; i < ex.length; i++) {
+            newData[i] = (byte) (data[ex[i]-1] != key[i] ? 1 : 0);
+        }
+        byte[][] s = new byte[8][6];
+        int idx = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 6; j++) {
+                s[i][j] = newData[idx++];
+            }
+        }
+        byte[] newData1 = new byte[32];
+        idx = 0;
+        for (int i=0; i<s.length; i++) {
+            int r = s[i][0] * 2 + s[i][5];
+            int q = s[i][1] * 8 + s[i][2] * 4 + s[i][3] * 2 + s[i][4];
+            int v = sbox[i][r*16+q];
+            newData1[idx++] = (byte)((v&8) >> 3);
+            newData1[idx++] = (byte)((v&4) >> 2);
+            newData1[idx++] = (byte)((v&2) >> 1);
+            newData1[idx++] = (byte)(v&1);
+        }
+        byte[] result = new byte[32];
+        for (int i = 0; i < p.length; i++) {
+            result[i] = newData1[p[i]-1];
+        }
+        return result;
+    }
+    
+    private byte[][] genSubKey(byte[] key) {
+        
+//      System.out.print("‰∏ªkey:");
+//      for (int j=0;j<64; j++) {
+//          System.out.print(key[j]);
+//      }
+//      System.out.println();
+        
+        int[] pc1 = {57,49,41,33,25,17,9,
+                  1,58,50,42,34,26,18,
+                  10,2,59,51,43,35,27,
+                  19,11,3,60,52,44,36,
+                  63,55,47,39,31,23,15,
+                  7,62,54,46,38,30,22,
+                  14,6,61,53,45,37,29,
+                  21,13,5,28,20,12,4};
+        int[] pc2 = {14,17,11,24,1,5,
+                  3,28,15,6,21,10,
+                  23,19,12,4,26,8,
+                  16,7,27,20,13,2,
+                  41,52,31,37,47,55,
+                  30,40,51,45,33,48,
+                  44,49,39,56,34,53,
+                  46,42,50,36,29,32};
+        int[] ls = {1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1};
+        byte[] C = new byte[28];
+        byte[] D = new byte[28];
+        for (int i=0; i<28; i++) {
+            C[i] = key[pc1[i]-1];
+            D[i] = key[pc1[i+28]-1];
+        }
+        byte[][] subKeys = new byte[16][48];
+        for (int i=0; i<16; i++) {
+            byte[] C1 = new byte[28];
+            byte[] D1 = new byte[28];
+            for (int j=0; j<28 - ls[i]; j++) {
+                C1[j] = C[j + ls[i]];
+                D1[j] = D[j + ls[i]];
+            }
+            for (int j=0; j<ls[i]; j++) {
+                C1[28 - ls[i] + j] = C[j];
+                D1[28 - ls[i] + j] = D[j];
+            }
+            byte[] newData1 = new byte[56];
+            for (int j=0; j<28; j++) {
+                newData1[j] = C1[j];
+                newData1[j+28] = D1[j];
+            }
+            for (int j=0; j<48; j++) {
+                subKeys[i][j] = newData1[pc2[j]-1];
+            }
+            C = C1;
+            D = D1;
+        }
+        
+//      for (int i=0; i<16; i++) {
+//          System.out.print("Á¨¨" + (i<10?"0" :"") + i + "Êää:");
+//          for (int j=0;j<48; j++) {
+//              System.out.print(subKeys[i][j]);
+//          }
+//          System.out.println();
+//      }
+        return subKeys;
+    }
+    
+    /**
+     * DES ÁöÑ key ÁÇ∫ 8 bytes, ÊØè byte ÊúÄÂæå‰∏ÄÁ¢ºÁÇ∫Âêå‰ΩçÂÖÉÊ™¢Êü•Á¢º, ÊïÖÁúüÊ≠£ÁöÑ key ÁÇ∫ 56 bits
+     */
+    private SecretKey genKey() throws Exception {
+        KeyGenerator keyGen = KeyGenerator.getInstance("DES");
+        //SecureRandom random = SecureRandom.getInstance("SHA1PRNG", "SUN");
+        //keyGen.init(56, random);
+        keyGen.init(56);
+        
+        //ÈÄèÈÅé provider gen key
+        SecretKey secretKey = keyGen.generateKey();
+        
+        //Ëá™Ë°åÊåáÂÆö key
+        secretKey = new SecretKey() {
+            public String getFormat() {
+                return "RAW";
+            }
+            public byte[] getEncoded() {
+                return "12345678".getBytes();
+            }
+            public String getAlgorithm() {
+                return "DES";
+            }
+        };
+        
+        //Ëá™Ë°åÊåáÂÆö key ÊñπÂºè 2
+        secretKey = new SecretKeySpec("12345678".getBytes(), "DES");
+        
+        return secretKey;
+    }
+    
+    private String toHex(byte[] data) {
+        String result = "";
+        for (int i = 0; i < data.length; i++) {
+            int v = data[i];
+            if (v < 0) {
+                v += 256;
+            }
+            String v1 = Integer.toHexString(v);
+            if (v1.length() == 1) {
+                v1 = "0" + v1;
+            }
+            result += v1;
+        }
+        return result.toUpperCase();
+    }
 }

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<J2SP><BkId>808</BkId><FILENAME>20130912104902.48_J2SP_TXD2SB33.XML</FILENAME><TABLENAME>TXD2SB33</TABLENAME><FLAG>1</FLAG><ITEM id="sign"><TXD2SB33 BKID="808" DSR="ＰＣ／ＡＢＳ　ＰＣ膠粒" IT="A" IVNO="PH97580250" LCBKACID="8080015" LCNO="2013C553S00447" LCSQNO="1" SQNO="1"></TXD2SB33><TXD2SB33 BKID="808" DSR="ＰＣ／ＡＢＳ　ＰＣ膠粒" IT="A" IVNO="PH97580253" LCBKACID="8080015" LCNO="2013C553S00447" LCSQNO="1" SQNO="1"></TXD2SB33><TXD2SB33 BKID="808" DSR="ＰＣ／ＡＢＳ　ＰＣ膠粒" IT="B" IVNO="PH97580253" LCBKACID="8080015" LCNO="2013C553S00447" LCSQNO="1" SQNO="1"></TXD2SB33></ITEM>
+<ds:Signature Id="SIG20130912104949973" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+  <ds:SignedInfo>
+    <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
+    <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
+    <ds:Reference URI="#sign">
+      <ds:Transforms>
+      <ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:Transform>
+      </ds:Transforms>
+      <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+      <ds:DigestValue>oQ45320IrrzKapzowXlQP54eY9E=</ds:DigestValue>
+    </ds:Reference>
+  </ds:SignedInfo>
+  <ds:SignatureValue>tow42QA3OOp6oVPBYSFPODonklDmRImEz1KAm128YplPL6mV32SvB9g8whajFpbr61zr1QqCduKk1XxJBwKsfJB/5kY35zpo+dkqTtRNowk/VPm4MIKHgiPjPP2dUIDdjcA2dtEfkUq7R7039J+eWiu/OvyJBbqG1c4qS04MhTo=</ds:SignatureValue>
+  <ds:KeyInfo>
+    <ds:X509Data>
+      <ds:X509IssuerSerial>
+        <ds:X509IssuerName>CN=TaiCA Information User CA, OU=User CA, O=TaiCA, C=TW</ds:X509IssuerName>
+        <ds:X509SerialNumber>104643</ds:X509SerialNumber>
+      </ds:X509IssuerSerial>
+      <ds:X509SubjectName>CN=75708007-01-000, OU=FIV, OU=97162640-RA-INFO158, OU=TaiCA Information User CA, O=Information, C=TW</ds:X509SubjectName>
+      <ds:X509Certificate>MIIENDCCAxygAwIBAgIDAZjDMA0GCSqGSIb3DQEBBQUAMFMxCzAJBgNVBAYTAlRXMQ4wDAYDVQQKEwVUYWlDQTEQMA4GA1UECxMHVXNlciBDQTEiMCAGA1UEAxMZVGFpQ0EgSW5mb3JtYXRpb24gVXNlciBDQTAeFw0xMzA1MjcwODIwMDVaFw0xNDA1MzExNTU5NTlaMIGNMQswCQYDVQQGEwJUVzEUMBIGA1UEChMLSW5mb3JtYXRpb24xIjAgBgNVBAsTGVRhaUNBIEluZm9ybWF0aW9uIFVzZXIgQ0ExHDAaBgNVBAsTEzk3MTYyNjQwLVJBLUlORk8xNTgxDDAKBgNVBAsTA0ZJVjEYMBYGA1UEAxMPNzU3MDgwMDctMDEtMDAwMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDfX0lmQEXLXz7QlhbOsSAX5mAFs6bmowcDBln9jLfjrlGMwZnwUQWgy2K5S5AG2llzR0kVT5l5Ef6bA2sPcj7Z86bnjpBOqmWJqJrpOjoCLIpa09lgQPJjKn4yUsWs28pBh85jOr55nA2TnHA2nijZSeBeHGEEsY4XnUNGOYS/2wIDAQABo4IBWDCCAVQwHwYDVR0jBBgwFoAU7q38uisGTqs+6z45lKtWhy/3ADswHQYDVR0OBBYEFKeEuCgaqq5y3JYkwMv1NBctiJATMFQGA1UdHwRNMEswSaBHoEWGQ2h0dHA6Ly9zc2wudGFpY2EuY29tLnR3L3VzZXIvQ1JML1RhaUNBX0luZm9ybWF0aW9uX1VzZXJfQ0FfMjAxMC5jcmwwDQYDVR0RBAYwBIECQEAwOQYIKwYBBQUHAQEELTArMCkGCCsGAQUFBzABhh1odHRwOi8vb2NzcC50YWljYS5jb20udHc6ODAwMDBXBgNVHSAEUDBOMEwGB2CBHgMBCAUwQTAiBggrBgEFBQcCAjAWGhRSZXN0cmljdGlvbiA9My4yLjEuMTAbBggrBgEFBQcCARYPd3d3LnR3Y2EuY29tLnR3MAkGA1UdEwQCMAAwDgYDVR0PAQH/BAQDAgbAMA0GCSqGSIb3DQEBBQUAA4IBAQAU/3QekYjU9qge6e/X/7RiKWDFkMuw+TZsI8RT0tlySi/RWiDmn2k2oJ1A/DRpa+r49DppXgZzGTO5un1/Dj4qBbgJmMgJgOU226tCgCGjBDLTR+78UsUJF//5o/rKsQoylJzrzcrb3K+Fz4qal4XiAI8uysmUN7gHw6pZd2tSKh904s62HCz0DrCs8YNkfJj+loXU7L+YzVGnAj/Bjrc5DkQSq7jxzYA3DoPoHbyWnrrijBxhXsdzH1P+pm15eKbFKTsta9jIWRJRpvy3Ij/8qscVcrgwywysQSH8qM4H1A/2KhILym/tcGeYPztWLmKJE/e/yofGaWsrenOID2vk</ds:X509Certificate>
+    </ds:X509Data>
+  </ds:KeyInfo>
+</ds:Signature>
+</J2SP>

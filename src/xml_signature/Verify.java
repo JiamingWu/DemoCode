@@ -33,7 +33,7 @@ public class Verify {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		dbf.setNamespaceAware(true);
 		Document doc = dbf.newDocumentBuilder().parse(
-				Verify.class.getResourceAsStream("test22.XML"));
+				Verify.class.getResourceAsStream("b33_receiver.xml"));
 
 		// Find Signature element
 		NodeList nl = doc.getElementsByTagNameNS(XMLSignature.XMLNS, "Signature");

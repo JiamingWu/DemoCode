@@ -13,6 +13,7 @@ public class ReadCert {
 		 CertificateFactory cf = CertificateFactory.getInstance("X.509");
 		 Certificate cert = cf.generateCertificate(is);
 		 X509Certificate x509cert = (X509Certificate) cert;
+		 System.out.println(x509cert.getSigAlgName());
 		 byte[] data = x509cert.getExtensionValue("2.5.29.9");
 		 String regNo = new String(data, data.length-8, 8);
 		 System.out.println(regNo);

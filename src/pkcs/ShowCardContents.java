@@ -1,4 +1,5 @@
 package pkcs;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.math.BigInteger;
 import java.security.KeyStore;
@@ -24,18 +25,27 @@ import sun.security.x509.X500Name;
 public class ShowCardContents {
 
     /**
-     * ª›≠n•[§J -Djava.security.debug=sunpkcs11 ®”∞ı¶Ê
+     * ÈúÄË¶ÅÂä†ÂÖ• -Djava.security.debug=sunpkcs11 ‰æÜÂü∑Ë°å
      */
     public static void main(String[] args) {
 
         //Load the implementation of PKCS11
-        String pkcs11ConfigFile = "D:\\MyDocuments\\Data\\work\\mycode\\src\\pkcs\\pkcs11.cfg";
-        Provider pkcs11Provider = new sun.security.pkcs11.SunPKCS11(pkcs11ConfigFile);
+        String data = "name=ikey\r\n" + 
+        		"#library=D:\\MyDocuments\\Data\\projects\\CERTSVR\\source\\src\\dll\\dkck201.dll\r\n" +
+        		"#library=C:\\Windows\\SysWOW64\\dkck201.dll\r\n" +
+        		"library=C:\\Windows\\SysWOW64\\dkck232.dll\r\n";
+        
+//        String data = "name = SmartCard\r\n" + 
+//        		"library = D:\\MyDocuments\\Data\\projects\\CERTSVR\\source\\src\\dll\\HiCOSPKCS11.dll";
+
+        ByteArrayInputStream bais = new ByteArrayInputStream(data.getBytes());
+        Provider pkcs11Provider = new sun.security.pkcs11.SunPKCS11(bais);
         Security.addProvider(pkcs11Provider);
 
         //PIN is used to protect the information strored in the card
-        String pin = "680507";
-        //String pin = "PASSWORD";
+//        String pin = "680507";
+//        String pin = "680118";
+        String pin = "PASSWORD";
 
         try {
 
@@ -67,9 +77,7 @@ public class ShowCardContents {
                 System.out.println("Cipher Text: " + byte2hex(cipherText));
                 byte[] decryptedText = publicDecrypt(cipherText, publicKey);
                 System.out.println("Decrypted Text: " + new String(decryptedText));
-
-            }
-            if (cert != null) {
+                
                 byte[] result = sign(cert, privateKey, "Hello!".getBytes());
                 System.out.println("sign finish:" + result);
             }
