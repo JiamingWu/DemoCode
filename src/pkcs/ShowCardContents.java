@@ -30,13 +30,17 @@ public class ShowCardContents {
     public static void main(String[] args) {
 
         //Load the implementation of PKCS11
-        String data = "name=ikey\r\n" + 
-        		"#library=D:\\MyDocuments\\Data\\projects\\CERTSVR\\source\\src\\dll\\dkck201.dll\r\n" +
-        		"#library=C:\\Windows\\SysWOW64\\dkck201.dll\r\n" +
-        		"library=C:\\Windows\\SysWOW64\\dkck232.dll\r\n";
+//        String data = "name=ikey\r\n" + 
+//        		"#library=D:\\MyDocuments\\Data\\projects\\CERTSVR\\source\\src\\dll\\dkck201.dll\r\n" +
+//        		"#library=C:\\Windows\\SysWOW64\\dkck201.dll\r\n" +
+//        		"library=C:\\Windows\\SysWOW64\\dkck232.dll\r\n";
         
 //        String data = "name = SmartCard\r\n" + 
 //        		"library = D:\\MyDocuments\\Data\\projects\\CERTSVR\\source\\src\\dll\\HiCOSPKCS11.dll";
+
+    	  String data = "name = SmartCard\r\n" + 
+          		"library = /Library/OpenSC/lib/pkcs11/opensc-pkcs11.so\r\n"
+          		+ "slot = 2";
 
         ByteArrayInputStream bais = new ByteArrayInputStream(data.getBytes());
         Provider pkcs11Provider = new sun.security.pkcs11.SunPKCS11(bais);
@@ -44,8 +48,8 @@ public class ShowCardContents {
 
         //PIN is used to protect the information strored in the card
 //        String pin = "680507";
-//        String pin = "680118";
-        String pin = "PASSWORD";
+        String pin = "680118";
+//        String pin = "PASSWORD";
 
         try {
 
@@ -57,7 +61,9 @@ public class ShowCardContents {
             Enumeration aliasesEnum = smartCardKeyStore.aliases();
             X509Certificate cert = null;
             PrivateKey privateKey = null;
+            int i=0;
             while (aliasesEnum.hasMoreElements()) {
+            	i++;
                 System.out.println("---------------------------");
                 //Print alias
                 String alias = (String) aliasesEnum.nextElement();
@@ -77,7 +83,8 @@ public class ShowCardContents {
                 System.out.println("Cipher Text: " + byte2hex(cipherText));
                 byte[] decryptedText = publicDecrypt(cipherText, publicKey);
                 System.out.println("Decrypted Text: " + new String(decryptedText));
-                
+                //在 MAC 下，搭配 OpenSC 之 pkcs11，只能 Sign 一次，第二次會出現 CKR_USER_NOT_LOGGED_IN
+                //原因待查
                 byte[] result = sign(cert, privateKey, "Hello!".getBytes());
                 System.out.println("sign finish:" + result);
             }
@@ -85,6 +92,8 @@ public class ShowCardContents {
             e.printStackTrace();
         }
     }
+    
+    
 
     /**
      * Encrypt the plain text with private key.
