@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<project name="hibernate" default="gen" basedir=".">
+
+	<property name="resource.dir" value="." />
+	<property name="build.dir" value="${resource.dir}/build" />
+	<property name="lib.dir" value="${resource.dir}/hibernate_lib" />
+	
+	<path id="toolslib">  
+	 <path location="${lib.dir}/hibernate-tools.jar" />
+	 <path location="${lib.dir}/jtidy-r8-20060801.jar" />
+	 <path location="${lib.dir}/bsh-2.0b1.jar" />
+	 <path location="${lib.dir}/hibernate3.jar" />  
+	 <path location="${lib.dir}/freemarker-2.3.8.jar" />  
+	 <path location="${lib.dir}/jtds-1.2.7.jar" />  
+	 <path location="${lib.dir}/slf4j-api-1.6.2.jar" />  
+	 <path location="${lib.dir}/jcl-over-slf4j-1.6.2.jar" />  
+	 <path location="${lib.dir}/dom4j-1.6.1.jar" />  
+	 <path location="${lib.dir}/commons-collections-3.2.1.jar" />  
+	</path>
+	<target name="gen">
+	  <taskdef name="hibernatetool"   
+			         classname="org.hibernate.tool.ant.HibernateToolTask"   
+			         classpathref="toolslib" />  
+	  <deltree dir="${build.dir}/generated"/>
+	  <hibernatetool destdir="${build.dir}/generated">  
+	    <jdbcconfiguration propertyfile="hibernate.properties" packagename="idv.allen.model"/>  
+	    <hbm2hbmxml />  
+	    <hbm2java jdk5="true" />  
+	    <hbm2cfgxml ejb3="false" />  
+	    </hibernatetool>  
+	</target>
+</project>
