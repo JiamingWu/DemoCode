@@ -3,7 +3,9 @@ package multicasting;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
+import java.net.NetworkInterface;
 
 /**
  *
@@ -17,8 +19,19 @@ public class MulticastReceiver {
     try {
       //Prepare to join multicast group
       socket = new MulticastSocket(8888);
+      
+      //
       InetAddress address = InetAddress.getByName("224.2.2.3");
-      socket.joinGroup(address);
+      //socket.joinGroup(address);
+      
+      //綁定
+      //String adapterName = "eth0";
+      String adapterName = java.net.InetAddress.getLocalHost().getHostAddress();
+      System.out.println(adapterName);
+      NetworkInterface nic = NetworkInterface.getByName(adapterName);
+      System.out.println(nic);
+      socket.joinGroup(new InetSocketAddress("224.2.2.3", 8888), nic);
+      
  
       while (true) {
         inPacket = new DatagramPacket(inBuf, inBuf.length);
